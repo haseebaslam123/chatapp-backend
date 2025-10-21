@@ -7,6 +7,7 @@ require('dotenv').config();
 
 // Import database connection
 const connectDB = require('./config/database');
+const app = express();
 
 app.use(
   cors({
@@ -26,7 +27,7 @@ const messageRoutes = require('./routes/messages');
 const socketHandler = require('./socket/socketHandler');
 
 // Initialize Express app
-const app = express();
+
 const server = http.createServer(app);
 
 // Initialize Socket.IO
