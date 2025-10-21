@@ -211,11 +211,11 @@ router.post('/avatar', auth, uploadAvatar.single('avatar'), async (req, res) => 
       return res.status(400).json({ success: false, message: 'No file uploaded' });
     }
 
-    const publicPath = `/uploads/avatars/${req.file.filename}`;
+    const filePath = `${process.env.REACT_APP_SOCKET_URL}/uploads/avatars/${req.file.filename}`;
 
     const user = await User.findByIdAndUpdate(
       req.user._id,
-      { avatar: publicPath },
+      { avatar: filePath },
       { new: true }
     ).select('-password');
 

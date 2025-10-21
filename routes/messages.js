@@ -402,14 +402,14 @@ router.post("/upload", auth, upload.single("file"), async (req, res) => {
       return res.status(400).json({ success: false, message: "No file uploaded" });
     }
 
-    const publicPath = `/uploads/messages/${req.file.filename}`;
+    const filePath = `${process.env.REACT_APP_SOCKET_URL}/uploads/messages/${req.file.filename}`;
     const mime = req.file.mimetype || "";
     const messageType = mime.startsWith("image/") ? "image" : "file";
 
     const message = new Message({
       sender: senderId,
       receiver: receiverId,
-      content: publicPath,
+      content: filePath,
       messageType,
       chatId: chat._id,
     });
